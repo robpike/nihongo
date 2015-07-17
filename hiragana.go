@@ -173,8 +173,8 @@ var twoH = map[string]string{
 	"te": "て",
 	"to": "と",
 
-	"ti": "てぃ",
-	"tu": "とぅ",
+	"ti": "ち",
+	"tu": "つ",
 
 	"di": "でぃ",
 	"du": "どぅ",
@@ -260,6 +260,9 @@ var threeH = map[string]string{
 	"sha": "しゃ",
 	"shu": "しゅ",
 	"sho": "しょ",
+	"sya": "しゃ",
+	"syu": "しゅ",
+	"syo": "しょ",
 
 	"chi": "ち",
 	"tsu": "つ",
