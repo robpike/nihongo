@@ -72,6 +72,10 @@ var hiraganaTests = []testPair{
 	// Consonant modifier (tsu).
 	{"tcho", "っちょ"},
 	{"atcho", "あっちょ"},
+	// Plosive
+	{"shuppatu", "しゅっぱつ"},
+	{"syuppatu", "しゅっぱつ"},
+	{"syuppatsu", "しゅっぱつ"},
 	// Leave existing kana alone.
 	{"カタカナ日本語カタカナひらがなカタカナ\n", "カタカナ日本語カタカナひらがなカタカナ\n"},
 }
