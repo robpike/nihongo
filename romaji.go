@@ -51,7 +51,7 @@ func (r *romaji) Read(p []byte) (int, error) {
 func translateRomaji(t *translator) {
 	prevKana := false
 	skip := false
-	for {
+	for first := true; ; first = false {
 		r := t.next()
 		if r == eof {
 			break
@@ -69,7 +69,7 @@ func translateRomaji(t *translator) {
 			prevKana = false
 			continue
 		}
-		if !prevKana {
+		if !first && !prevKana {
 			t.put(' ')
 		}
 		prevKana = true

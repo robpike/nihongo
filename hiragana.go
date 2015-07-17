@@ -6,7 +6,6 @@ package nihongo
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 )
 
@@ -50,7 +49,15 @@ func (h *hiragana) Read(p []byte) (int, error) {
 }
 
 func translateHiragana(t *translator) {
-	prevConsonant := false
+	prevByte := -1
+	mark := func() {
+		if isConsonant[prevByte] {
+			t.putString("っ")
+		} else if prevByte >= 0 {
+			t.put(byte(prevByte))
+		}
+		prevByte = -1
+	}
 	for {
 		s := t.next3()
 		if len(s) == 0 {
@@ -59,40 +66,37 @@ func translateHiragana(t *translator) {
 		if len(s) == 3 {
 			cha, ok := threeH[s]
 			if ok {
-				if prevConsonant {
-					fmt.Printf("っ")
-				}
+				mark()
+				prevByte = -1
 				t.putString(cha)
 				t.advance(3)
-				prevConsonant = false
 				continue
 			}
 		}
 		if len(s) >= 2 {
 			ka, ok := twoH[s[:2]]
 			if ok {
-				if prevConsonant {
-					t.putString("っ")
-				}
+				mark()
 				t.putString(ka)
 				t.advance(2)
-				prevConsonant = false
 				continue
 			}
 		}
 		a, ok := oneH[s[:1]]
 		if ok {
-			if prevConsonant {
-				fmt.Printf("っ")
-			}
+			mark()
 			t.putString(a)
 			t.advance(1)
-			prevConsonant = false
 			continue
 		}
-		t.put(s[0])
+		if prevByte >= 0 {
+			t.put(byte(prevByte))
+		}
+		prevByte = int(s[0])
 		t.advance(1)
-		prevConsonant = isConsonant[s[0]]
+	}
+	if prevByte >= 0 {
+		t.put(byte(prevByte))
 	}
 	if t.ch != nil {
 		close(t.ch)
@@ -100,7 +104,7 @@ func translateHiragana(t *translator) {
 }
 
 // Note the absence of n and m.
-var isConsonant = map[byte]bool{
+var isConsonant = map[int]bool{
 	'b': true,
 	'c': true,
 	'd': true,
