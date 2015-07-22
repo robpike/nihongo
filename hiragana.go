@@ -176,8 +176,8 @@ var twoH = map[string]string{
 	"ti": "ち",
 	"tu": "つ",
 
-	"di": "でぃ",
-	"du": "どぅ",
+	"di": "ぢ",
+	"du": "づ",
 
 	"da": "だ",
 	"de": "で",
@@ -267,8 +267,9 @@ var threeH = map[string]string{
 	"chi": "ち",
 	"tsu": "つ",
 
-	"dhi": "ぢ",
-	"dhu": "づ",
+	"dhi": "でぃ",
+	"dhu": "でゅ",
+	"dwu": "どぅ",
 
 	"cha": "ちゃ",
 	"chu": "ちゅ",
