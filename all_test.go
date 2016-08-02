@@ -78,6 +78,9 @@ var hiraganaTests = []testPair{
 	{"syuppatsu", "しゅっぱつ"},
 	// Leave existing kana alone.
 	{"カタカナ日本語カタカナひらがなカタカナ\n", "カタカナ日本語カタカナひらがなカタカナ\n"},
+	//Hepburn / Kunrei
+	{"fujisannochishitsuchousa", "ふじさんのちしつちょうさ"},
+	{"huzisannotisitutyousa", "ふじさんのちしつちょうさ"},
 }
 
 func TestHiragana(t *testing.T) {
@@ -105,6 +108,9 @@ var katakanaTests = []testPair{
 	{"syuppatsu", "シュッパツ"},
 	// Leave existing kana alone.
 	{"カタカナ日本語カタカナひらがなカタカナ\n", "カタカナ日本語カタカナひらがなカタカナ\n"},
+	//Hepburn / Kunrei
+	{"fujisannochishitsuchousa", "フジサンノチシツチョウサ"},
+	{"huzisannotisitutyousa", "フジサンノチシツチョウサ"},
 }
 
 func TestKatakana(t *testing.T) {
