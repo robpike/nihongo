@@ -155,12 +155,14 @@ var twoH = map[string]string{
 	"go": "ご",
 
 	"sa": "さ",
+	"si": "し",
 	"su": "す",
 	"se": "せ",
 	"so": "そ",
 
 	"za": "ざ",
 	"ji": "じ",
+	"zi": "じ",
 	"zu": "ず",
 	"ze": "ぜ",
 	"zo": "ぞ",
@@ -192,6 +194,7 @@ var twoH = map[string]string{
 	"ha": "は",
 	"hi": "ひ",
 	"fu": "ふ",
+	"hu": "ふ",
 	"he": "へ",
 	"ho": "ほ",
 
@@ -272,9 +275,13 @@ var threeH = map[string]string{
 	"dwu": "どぅ",
 
 	"cha": "ちゃ",
+	"tya": "ちゃ",
 	"chu": "ちゅ",
+	"tyu": "ちゅ",
 	"che": "ちぇ",
+	"tye": "ちぇ",
 	"cho": "ちょ",
+	"tyo": "ちょ",
 
 	"dha": "ぢゃ",
 	//"dhu": "ぢゅ",

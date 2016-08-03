@@ -49,6 +49,15 @@ func (k *katakana) Read(p []byte) (int, error) {
 }
 
 func translateKatakana(t *translator) {
+	prevByte := -1
+	mark := func() {
+		if isConsonant[prevByte] {
+			t.putString("ッ")
+		} else if prevByte >= 0 {
+			t.put(byte(prevByte))
+		}
+		prevByte = -1
+	}
 	for {
 		s := t.next3()
 		if len(s) == 0 {
@@ -57,6 +66,8 @@ func translateKatakana(t *translator) {
 		if len(s) == 3 {
 			cha, ok := threeK[s]
 			if ok {
+				mark()
+				prevByte = -1
 				t.putString(cha)
 				t.advance(3)
 				continue
@@ -65,6 +76,7 @@ func translateKatakana(t *translator) {
 		if len(s) >= 2 {
 			ka, ok := twoK[s[:2]]
 			if ok {
+				mark()
 				t.putString(ka)
 				t.advance(2)
 				continue
@@ -72,12 +84,19 @@ func translateKatakana(t *translator) {
 		}
 		a, ok := oneK[s[:1]]
 		if ok {
+			mark()
 			t.putString(a)
 			t.advance(1)
 			continue
 		}
-		t.put(s[0])
+		if prevByte >= 0 {
+			t.put(byte(prevByte))
+		}
+		prevByte = int(s[0])
 		t.advance(1)
+	}
+	if prevByte >= 0 {
+		t.put(byte(prevByte))
 	}
 	if t.ch != nil {
 		close(t.ch)
@@ -91,90 +110,186 @@ var oneK = map[string]string{
 	"e": "エ",
 	"o": "オ",
 	"n": "ン",
-	"m": "ン",
 }
 
 var twoK = map[string]string{
+	"xa": "ァ",
+	"xi": "ィ",
+	"xu": "ゥ",
+	"xe": "ェ",
+	"xo": "ォ",
+
 	"ka": "カ",
-	"ca": "カ",
-	"ga": "ガ",
 	"ki": "キ",
-	"gi": "ギ",
 	"ku": "ク",
-	"cu": "ク",
-	"gu": "グ",
 	"ke": "ケ",
-	"ge": "ゲ",
 	"ko": "コ",
-	"co": "コ",
+
+	"ga": "ガ",
+	"gi": "ギ",
+	"gu": "グ",
+	"ge": "ゲ",
 	"go": "ゴ",
+
 	"sa": "サ",
-	"za": "ザ",
 	"si": "シ",
-	"zi": "ジ",
 	"su": "ス",
-	"zu": "ズ",
 	"se": "セ",
-	"ze": "ゼ",
 	"so": "ソ",
+
+	"za": "ザ",
+	"ji": "ジ",
+	"zi": "ジ",
+	"zu": "ズ",
+	"ze": "ゼ",
 	"zo": "ゾ",
+
+	"ja": "ジャ",
+	"ju": "ジュ",
+	"jo": "ジョ",
+
 	"ta": "タ",
-	"da": "ダ",
-	"ti": "チ",
-	"di": "ヂ",
-	"tu": "ツ",
-	"du": "ヅ",
 	"te": "テ",
-	"de": "デ",
 	"to": "ト",
+
+	"ti": "チ",
+	"tu": "ツ",
+
+	"di": "ヂ",
+	"du": "ヅ",
+
+	"da": "ダ",
+	"de": "デ",
 	"do": "ド",
+
 	"na": "ナ",
 	"ni": "ニ",
 	"nu": "ヌ",
 	"ne": "ネ",
 	"no": "ノ",
+
 	"ha": "ハ",
-	"va": "バ",
-	"pa": "パ",
 	"hi": "ヒ",
-	"vi": "ビ",
-	"pi": "ピ",
-	"fe": "フェ",
 	"fu": "フ",
-	"bu": "ブ",
-	"pu": "プ",
-	"he": "ヘ",
-	"ve": "ベ",
-	"pe": "ペ",
+	"hu": "フ",
+	"he": "へ",
 	"ho": "ホ",
-	"vo": "ボ",
+
+	"ba": "バ",
+	"bi": "ビ",
+	"bu": "ブ",
+	"be": "べ",
+	"bo": "ボ",
+
+	"pa": "パ",
+	"pi": "ピ",
+	"pu": "プ",
+	"pe": "ペ",
 	"po": "ポ",
+
+	"fa": "ファ",
+	"fi": "フィ",
+	"fe": "フェ",
+	"fo": "フォ",
+
 	"ma": "マ",
 	"mi": "ミ",
 	"mu": "ム",
 	"me": "メ",
 	"mo": "モ",
+
 	"ya": "ヤ",
 	"yu": "ユ",
+	"ye": "イェ",
 	"yo": "ヨ",
+
 	"ra": "ラ",
 	"ri": "リ",
 	"ru": "ル",
 	"re": "レ",
 	"ro": "ロ",
+
 	"wa": "ワ",
-	"wi": "ヰ",
-	"we": "ヱ",
+	//"wi": "ヰ",
+	//"we": "ヱ",
 	"wo": "ヲ",
-	"vu": "ヴ",
+
+	//"wa": "ウァ",
+	"wi": "ウィ",
+	"we": "ウェ",
+	//"wo": "ウォ",
+
+	"va": "ヴァ",
+	"vi": "ヴィ",
+	"vu": "ゔ",
+	"ve": "ヴェ",
+	"vo": "ヴォ",
 }
 
 var threeK = map[string]string{
+	"kya": "キャ",
+	"kyu": "キュ",
+	"kyo": "キョ",
+
+	"gya": "ギャ",
+	"gyu": "ギュ",
+	"gyo": "ギョ",
+
 	"shi": "シ",
+
+	"sha": "シャ",
+	"shu": "シュ",
+	"sho": "ショ",
+	"sya": "シャ",
+	"syu": "シュ",
+	"syo": "ショ",
+
 	"chi": "チ",
 	"tsu": "ツ",
-	"cha": "チャ", // TODO IS THIS RIGHT
-	"chu": "チュ", // TODO IS THIS RIGHT
-	"cho": "チョ", // TODO IS THIS RIGHT
-	// NEED MORE
+
+	"dhi": "ディ",
+	"dhu": "デュ",
+	"dwu": "ドゥ",
+
+	"cha": "チャ",
+	"tya": "チャ",
+	"chu": "チュ",
+	"tyu": "チュ",
+	"che": "チェ",
+	"tye": "チェ",
+	"cho": "チョ",
+	"tyo": "チョ",
+
+	"dha": "ヂァ",
+	//"dhu": "ヂゥ",
+	"dhe": "ヂェ",
+	"dho": "ヂョ",
+
+	"nya": "ニャ",
+	"nyu": "ニュ",
+	"nyo": "ニョ",
+
+	"hya": "ヒャ",
+	"hyu": "ヒュ",
+	"hyo": "ヒョ",
+
+	"bya": "ビャ",
+	"byu": "ビュ",
+	"byo": "ビョ",
+
+	"pya": "ピャ",
+	"pyu": "ピュ",
+	"pyo": "ピョ",
+
+	"mya": "ミャ",
+	"myu": "ミュ",
+	"myo": "ミョ",
+
+	"xya": "ャ",
+	"xyu": "ュ",
+	"xyo": "ョ",
+
+	"rya": "リャ",
+	"ryu": "リュ",
+	"ryo": "リョ",
 }
