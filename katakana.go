@@ -221,7 +221,7 @@ var twoK = map[string]string{
 
 	"va": "ヴァ",
 	"vi": "ヴィ",
-	"vu": "ゔ",
+	"vu": "ヴ",
 	"ve": "ヴェ",
 	"vo": "ヴォ",
 }
