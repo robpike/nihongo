@@ -34,7 +34,7 @@ func testBytes(name string, t *testing.T, test testPair, tr func([]byte) []byte)
 func testReader(name string, t *testing.T, test testPair, tr func(io.Reader) io.Reader) {
 	data, err := ioutil.ReadAll(tr(strings.NewReader(test.in)))
 	if err != nil {
-		t.Errorf("reader %s: v\n", name, err)
+		t.Errorf("reader %s: %v\n", name, err)
 		return
 	}
 	result := string(data)
