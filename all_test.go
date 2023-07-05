@@ -81,6 +81,9 @@ var hiraganaTests = []testPair{
 	//Hepburn / Kunrei
 	{"fujisannochishitsuchousa", "ふじさんのちしつちょうさ"},
 	{"huzisannotisitutyousa", "ふじさんのちしつちょうさ"},
+	// Small kana
+	{"delelyala", "でぇゃぁ"},
+	{"lyululyoololi", "ゅぅょおぉぃ"},
 }
 
 func TestHiragana(t *testing.T) {
@@ -111,6 +114,9 @@ var katakanaTests = []testPair{
 	//Hepburn / Kunrei
 	{"fujisannochishitsuchousa", "フジサンノチシツチョウサ"},
 	{"huzisannotisitutyousa", "フジサンノチシツチョウサ"},
+	// Small kana
+	{"delelyala", "デェャァ"},
+	{"lyululyoololi", "ュゥョオォィ"},
 }
 
 func TestKatakana(t *testing.T) {

@@ -141,6 +141,11 @@ var twoH = map[string]string{
 	"xu": "ぅ",
 	"xe": "ぇ",
 	"xo": "ぉ",
+	"la": "ぁ",
+	"li": "ぃ",
+	"lu": "ぅ",
+	"le": "ぇ",
+	"lo": "ぉ",
 
 	"ka": "か",
 	"ki": "き",
@@ -311,6 +316,9 @@ var threeH = map[string]string{
 	"xya": "ゃ",
 	"xyu": "ゅ",
 	"xyo": "ょ",
+	"lya": "ゃ",
+	"lyu": "ゅ",
+	"lyo": "ょ",
 
 	"rya": "りゃ",
 	"ryu": "りゅ",
