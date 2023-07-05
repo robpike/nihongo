@@ -118,6 +118,11 @@ var twoK = map[string]string{
 	"xu": "ゥ",
 	"xe": "ェ",
 	"xo": "ォ",
+	"la": "ァ",
+	"li": "ィ",
+	"lu": "ゥ",
+	"le": "ェ",
+	"lo": "ォ",
 
 	"ka": "カ",
 	"ki": "キ",
@@ -288,6 +293,9 @@ var threeK = map[string]string{
 	"xya": "ャ",
 	"xyu": "ュ",
 	"xyo": "ョ",
+	"lya": "ャ",
+	"lyu": "ュ",
+	"lyo": "ョ",
 
 	"rya": "リャ",
 	"ryu": "リュ",
